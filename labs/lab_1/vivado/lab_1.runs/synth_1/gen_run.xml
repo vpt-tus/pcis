@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="synth_1" LaunchPart="xc7a35tcpg236-1" LaunchTime="1511971623">
+<GenRun Id="synth_1" LaunchPart="xc7a35tcpg236-1" LaunchTime="1511984431">
   <File Type="PA-TCL" Name="lab1_top.tcl"/>
   <File Type="RDS-PROPCONSTRS" Name="lab1_top_drc_synth.rpt"/>
   <File Type="REPORTS-TCL" Name="lab1_top_reports.tcl"/>
@@ -62,9 +62,7 @@
     </Config>
   </FileSet>
   <Strategy Version="1" Minor="2">
-    <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2017">
-      <Desc>Vivado Synthesis Defaults</Desc>
-    </StratHandle>
+    <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2017"/>
     <Step Id="synth_design"/>
   </Strategy>
 </GenRun>

@@ -60,14 +60,11 @@ proc step_failed { step } {
   close $ch
 }
 
-set_msg_config -id {HDL 9-1061} -limit 100000
-set_msg_config -id {HDL 9-1654} -limit 100000
 
 start_step init_design
 set ACTIVE_STEP init_design
 set rc [catch {
   create_msg_db init_design.pb
-  set_param xicom.use_bs_reader 1
   create_project -in_memory -part xc7a35tcpg236-1
   set_property board_part digilentinc.com:basys3:part0:1.1 [current_project]
   set_property design_mode GateLvl [current_fileset]
@@ -115,7 +112,7 @@ set rc [catch {
   write_checkpoint -force lab1_top_placed.dcp
   create_report "impl_1_place_report_io_0" "report_io -file lab1_top_io_placed.rpt"
   create_report "impl_1_place_report_utilization_0" "report_utilization -file lab1_top_utilization_placed.rpt -pb lab1_top_utilization_placed.pb"
-  create_report "impl_1_place_report_control_sets_0" "report_control_sets -verbose -file lab1_top_control_sets_placed.rpt"
+  create_report "impl_1_place_report_control_sets_0" "report_control_sets -file lab1_top_control_sets_placed.rpt"
   close_msg_db -file place_design.pb
 } RESULT]
 if {$rc} {
@@ -136,7 +133,7 @@ set rc [catch {
   create_report "impl_1_route_report_methodology_0" "report_methodology -file lab1_top_methodology_drc_routed.rpt -pb lab1_top_methodology_drc_routed.pb -rpx lab1_top_methodology_drc_routed.rpx"
   create_report "impl_1_route_report_power_0" "report_power -file lab1_top_power_routed.rpt -pb lab1_top_power_summary_routed.pb -rpx lab1_top_power_routed.rpx"
   create_report "impl_1_route_report_route_status_0" "report_route_status -file lab1_top_route_status.rpt -pb lab1_top_route_status.pb"
-  create_report "impl_1_route_report_timing_summary_0" "report_timing_summary -max_paths 10 -file lab1_top_timing_summary_routed.rpt -warn_on_violation  -rpx lab1_top_timing_summary_routed.rpx"
+  create_report "impl_1_route_report_timing_summary_0" "report_timing_summary -file lab1_top_timing_summary_routed.rpt -warn_on_violation  -rpx lab1_top_timing_summary_routed.rpx"
   create_report "impl_1_route_report_incremental_reuse_0" "report_incremental_reuse -file lab1_top_incremental_reuse_routed.rpt"
   create_report "impl_1_route_report_clock_utilization_0" "report_clock_utilization -file lab1_top_clock_utilization_routed.rpt"
   close_msg_db -file route_design.pb
