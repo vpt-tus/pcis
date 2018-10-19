@@ -4,4 +4,4 @@ if ERRORLEVEL 1 (
   exit
 )
 call xelab -R -s shift_register -nolog -debug all shift_register_test_1
-rem call xsim run_1 -gui
+rem call xsim shift_register -gui

@@ -37,8 +37,8 @@ module counter_test_1;
 	end
 
 	initial begin
-		$display("clock	 reset	cnt(bin)  cnt(dec) ");
-		$monitor("	%b		%b		%b		  %d", reset, clock, cnt, cnt);
+		$display("clock  reset  cnt  cnt ");
+		$monitor("  %b      %b     %b   %d", reset, clock, cnt, cnt);
 		$dumpfile("dump.vcd");
 	end
 
@@ -48,7 +48,7 @@ module counter_test_2;
 
 	localparam size = 2;
 
-	logic clock, logic reset;
+	logic clock, reset;
 	logic [size-1:0] cnt;
 
 	// Instantiate the Unit Under Test (UUT)

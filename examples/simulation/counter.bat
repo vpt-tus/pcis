@@ -3,5 +3,5 @@ call xvlog -sv -nolog counter.sv;
 if ERRORLEVEL 1 (
   exit
 )
-call xelab -R -s run_1 -nolog -debug all work.counter_test_v1
-rem call xsim run_1 -gui
+call xelab -R -s counter -nolog -debug all counter_test_1
+rem call xsim counter -gui
