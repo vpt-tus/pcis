@@ -87,3 +87,5 @@
 !*.xmp
 #Do NOT ignore *.zip files
 !*.zip
+!*.bat
+!*.cmd
