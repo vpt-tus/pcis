@@ -40,6 +40,7 @@ module counter_test_1;
 		$display("clock  reset  cnt  cnt ");
 		$monitor("  %b      %b     %b   %d", reset, clock, cnt, cnt);
 		$dumpfile("dump.vcd");
+		$dumpvars;
 	end
 
 endmodule
