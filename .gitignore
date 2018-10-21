@@ -85,7 +85,8 @@
 !*.elf
 !*.bmm
 !*.xmp
-#Do NOT ignore *.zip files
+#Do NOT ignore ...
 !*.zip
 !*.bat
 !*.cmd
+!README
