@@ -42,7 +42,7 @@ module shift_register_test_1;
 		#100 reset_n = 1;
 		#20 load = 1;
 		#100 load = 0;
-		#5000 $finish;
+		#1000 $finish;
 	end
 
 	initial begin
