@@ -81,8 +81,8 @@ module ALU_74181_test;
 
 		$display("%0t %s", $time, "F = -1");
 		M = 0; Cn = 1; S = 3;
-		test_vector(0, 0, -1);
-		test_vector(1, 1, -1);
+		test_vector(0, 0, 4'b1111);
+		test_vector(1, 1, 4'b1111);
 		test_vector(1, 0, -1);
 		test_vector(0, 1, -1);
 		test_vector(15, 15, -1);
@@ -103,9 +103,10 @@ module ALU_74181_test;
 		test_vector(1, 1, 1);
 		test_vector(1, 0, 2);
 		test_vector(0, 1, 0);
-		test_vector(4'b0100, 4'b0011, 4'b1000);
-		test_vector(4'b0000, 4'b1111, 4'b0000);
-		test_vector(4'b1111, 4'b1111, 4'b1111);
+		test_vector(4'b0100, 4'b0011, 4'b1000); // A = 4, B = 2, F = -8
+		test_vector(4'b0000, 4'b1111, 4'b0000); // A = 0, B = -1, F = 0
+		test_vector(4'b1111, 4'b1111, 4'b1111); // A = -1, B = -1, F = -1
+		test_vector(4'b1110, 4'b0010, 4'b1010); // A = -2, B = 2, F = -6
 
 		$display("%0t %s", $time, "F = !(A and B)");
 		M = 1; Cn = 1; S = 4;
@@ -117,6 +118,7 @@ module ALU_74181_test;
 		test_vector(4'b0100, 4'b1100, 4'b1011);
 		test_vector(4'b0000, 4'b1111, 4'b1111);
 		test_vector(4'b1111, 4'b1111, 4'b0000);
+		
 		$finish;
 	end
 endmodule
