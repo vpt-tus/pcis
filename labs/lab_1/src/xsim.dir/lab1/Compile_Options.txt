@@ -1,0 +1,1 @@
+-R -s "lab1" -nolog -debug "all" "lab1_test" 

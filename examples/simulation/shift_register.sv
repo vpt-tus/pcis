@@ -1,52 +1,47 @@
-`timescale 1ns / 1ps
+`timescale 10ns / 1ns
 
 module shift_register  #(parameter N = 8) (
 	input clock,
-	input reset_n,
-	input load,
+	input [2:0] mode,
 	input [N-1:0] data_in,
-	output [N-1:0] data_out
+	output logic [N-1:0] data_out
 );
 
-var logic [N-1:0] data;
-
-assign data_out = data;
-
-always_ff @(posedge clock, negedge reset_n)
-	if (~reset_n)
-		data <= 0;
-	else if (load)
-		data <= data_in;
-	else
-		data <= data << 1;
-
+always_ff @(posedge clock)
+	case(mode)
+		3'b000: data_out <= 0; // clear
+		3'b111: data_out <= data_in; // load
+		3'b100: data_out <= data_out << 1; // shift left
+		3'b001: data_out <= data_out >> 1; // shift right
+		default: data_out <= data_out; // hold
+	endcase
 endmodule
 
 module shift_register_test_1;
 
 	localparam N = 6;
-	logic clock, reset_n, load;
+	localparam T = 10;
+	logic clock = 0;
+	logic [2:0] mode;
 	logic [N-1:0] data_in, data_out;
 
 	shift_register #(.N(N)) uut (.*);
 
+	initial forever #(T/2) clock = ~clock;
+
 	initial begin
-		clock = 0;
-		forever #50 clock = ~clock;
+		mode = 3'b000;
+		data_in = 1;		
+		#T mode = 3'b111; // load
+		#T mode = 3'b100; // shift left
+		#(4*T) mode = 3'b001; // shift right
+		#(3*T) mode = 3'b101; // hold
+		#(2*T) mode = 3'b000; // clear
+		#(2*T) $finish;
 	end
 
 	initial begin
-		reset_n = 0;
-		data_in = 1;
-		load = 0;
-		#100 reset_n = 1;
-		#20 load = 1;
-		#100 load = 0;
-		#1000 $finish;
-	end
-
-	initial begin
-		$monitor("%b %b %b",reset_n, load, data_out);
+		$monitor("%t %b %b %b",$time, mode, data_in, data_out);
 		$dumpfile("dump.vcd");
 		$dumpvars;
 	end

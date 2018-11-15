@@ -2,27 +2,19 @@
 
 module lab1_test;
 
-   // Inputs
-   logic clock;
-   logic reset;
+	logic clock = 0;
+	logic reset;
+	logic [7:0] sr;
 
-   // Outputs
-   logic [7:0] sr;
+	lab1 uut(.*);
 
-   // Instantiate the Unit Under Test (UUT)
-   lab1 uut(.*);
+	initial forever #50 clock = ~clock;
+	initial $monitor("%b",sr);
 
-   initial begin   
-       clock = 0;
-       forever #50 clock = ~clock;
-   end
-
-   initial begin
-      $monitor("%b",sr);
-          
-      reset = 1;
-      #100 reset = 0;      
-      #5000 $finish;      
-  end
+	initial begin
+		reset = 1;
+		#100 reset = 0;
+		#5000 $finish;
+	end
 
 endmodule
