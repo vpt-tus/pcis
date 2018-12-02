@@ -4,23 +4,26 @@
 
 Създайте проект в Xilinx Vivado
 
-![project settings](labs/lab_1/project_settings.png)
-![design structure](labs/lab_1/design_structure.png)
+![project settings](project_settings.png)
+
+Добавете файловете `lab1_top.sv, lab1.sv, clk_div.sv, clk_div_test.sv и Basus3_Master.xdc`
+
+![design structure](design_structure.png)
 
 Симулирайте модула lab1_test
 
-![lab1a simulation](labs/lab_1/lab1a_sim.png)
+![lab1a simulation](lab1a_sim.png)
 
 Генерирайте файл за програмиране на FPGA схемата и го заредете в експерименталната платка
 
-![hardware manager](labs/lab_1/hardware_manager.png)
+![hardware manager](hardware_manager.png)
 
 
 ## Задача 2
 
 Променете моделът от предишната задача, така че да се получи ефектът показан на следната фигура
 
-![lab1b simulation](labs/lab_1/lab1b_sim.png)
+![lab1b simulation](lab1b_sim.png)
 
 Генерирайте файл за програмиране на FPGA схемата и го заредете в експерименталната платка
 
@@ -28,7 +31,7 @@
 
 Променете моделът от предишната задача, така че да се получи ефектът показан на следната фигура
 
-![lab1b simulation](labs/lab_1/lab1c_sim.png)
+![lab1b simulation](lab1c_sim.png)
 
 Генерирайте файл за програмиране на FPGA схемата и го заредете в експерименталната платка
 
