@@ -2,11 +2,12 @@
 
 ## Задача 1
 
-Създайте проект в Xilinx Vivado
+Създайте проект в Xilinx Vivado. Изберете ИС xc7a35tcpg236-1
+.
 
 ![project settings](project_settings.png)
 
-Добавете файловете `lab1_top.sv, lab1.sv, clk_div.sv, clk_div_test.sv и Basus3_Master.xdc`
+Добавете файловете `lab1_top.sv, lab1.sv, clk_div.sv, lab1_test.sv и Basus3_Master.xdc`
 
 ![design structure](design_structure.png)
 
