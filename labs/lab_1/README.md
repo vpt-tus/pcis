@@ -4,8 +4,8 @@
 
 Създайте проект в Xilinx Vivado
 
-![project settings](labs/lab_1/Project&#32;settings.png)
-![design structure](labs/lab_1/Design&#32;structure.png)
+![project settings](labs/lab_1/project_settings.png)
+![design structure](labs/lab_1/design_structure.png)
 
 Симулирайте модула lab1_test
 
@@ -13,7 +13,7 @@
 
 Генерирайте файл за програмиране на FPGA схемата и го заредете в експерименталната платка
 
-![hardware manager](labs/lab_1/Hardware&#32;manager.png)
+![hardware manager](labs/lab_1/hardware_manager.png)
 
 
 ## Задача 2
