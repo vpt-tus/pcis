@@ -89,4 +89,6 @@
 !*.zip
 !*.bat
 !*.cmd
+!*.png
+!*.md
 !README
