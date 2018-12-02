@@ -1,11 +1,11 @@
 `timescale 10ns / 1ns
 
-typedef bcd [2:0] bcd3;
+typedef bcd [2:0] bcd3_t;
 
 module bcd_adder_3d(
-	input bcd3 op1, op2,
+	input bcd3_t op1, op2,
 	input cin,
-	output bcd3 sum,
+	output bcd3_t sum,
 	output logic cout
 	);
 
@@ -18,16 +18,16 @@ module bcd_adder_3d(
 endmodule
 
 module bcd_adder_3d_test;
-	bcd3 op1, op2, sum;
+	bcd3_t op1, op2, sum;
 	logic cin, cout;
 
 	bcd_adder_3d uut(.*);
 
 	task test_vector (
-		input bcd3 op1_test, op2_test,
+		input bcd3_t op1_test, op2_test,
 		input cin_test,
 		input cout_expected,
-		input bcd3 sum_expected);
+		input bcd3_t sum_expected);
 
 		op1 = op1_test;
 		op2 = op2_test;

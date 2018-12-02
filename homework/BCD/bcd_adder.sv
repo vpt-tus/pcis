@@ -1,11 +1,11 @@
 `timescale 10ns / 1ns
 
-typedef logic [3:0] bcd;
+typedef logic [3:0] bcd_t;
 
 module bcd_adder(
-	input bcd a,b,
+	input bcd_t a,b,
 	input cin,
-	output bcd s,
+	output bcd_t s,
 	output logic cout
 );
 
@@ -14,16 +14,16 @@ module bcd_adder(
 endmodule
 
 module bcd_adder_test;
-	bcd a, b, s;
+	bcd_t a, b, s;
 	logic cin, cout;
 
 	bcd_adder uut(.*);
 
 	task test_vector (
-		input bcd a_test, b_test,
+		input bcd_t a_test, b_test,
 		input cin_test,
 		input cout_expected,
-		input bcd s_expected);
+		input bcd_t s_expected);
 
 		a = a_test;
 		b = b_test;

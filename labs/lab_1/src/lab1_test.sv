@@ -2,11 +2,13 @@
 
 module lab1_test;
 
+	localparam N = 5;
+
 	logic clock = 0;
 	logic reset;
-	logic [7:0] sr;
+	logic [N-1:0] sr;
 
-	lab1 uut(.*);
+	lab1a #(.WIDTH(N)) uut(.*);
 
 	initial forever #50 clock = ~clock;
 	initial $monitor("%b",sr);

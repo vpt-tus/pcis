@@ -1,25 +1,24 @@
-module clk_div #(parameter DIVIDE_BY = 2)(
+// SCALE - pulses per half-period
+module clk_div #(parameter SCALE = 2)(
 	input clock_in,
 	input reset,
 	output logic clock_out
-);
+	);
+	localparam N = $clog2(2*SCALE-1);
+	logic [N-1:0] count;
  
-	integer counter;
-	const integer max_count = DIVIDE_BY / 2 - 1;
-	
-	always_ff @ (posedge clock_in, posedge reset) begin
+	always_ff @ (posedge clock_in, posedge reset)
 		if (reset) begin
-			counter <= 0;
-			clock_out <= 0;
+			count <= '0;
+			clock_out <= '0;
 		end
-		else if (counter == max_count) begin
-			counter <= 0;
+		else if (count == SCALE-1) begin
+			count <= '0;
 			clock_out <= ~clock_out;
 		end
 		else begin
-			counter <= counter + 1;
+			count <= count + 1;
 			clock_out <= clock_out;
 		end
-	end
- 
+
 endmodule
