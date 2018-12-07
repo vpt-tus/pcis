@@ -6,10 +6,10 @@ module fibonacci_top (
 );
 
 	logic clk_fn, clk_disp;
-	logic [15:0] fn;
+	logic [13:0] fn;
 
 	fibonacci u1 (.clk(clk_fn), .*);
-	disp_ctrl u2 (.clk(clk_disp), .*);
+	disp_ctrl u2 (.clk(clk_disp), .digits(fn), .*);
 
 	clk_div #(.SCALE(100_000)) u3 (
 		.clock_in(clk_100),
