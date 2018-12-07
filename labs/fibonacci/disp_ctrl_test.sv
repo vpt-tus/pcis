@@ -23,8 +23,6 @@ module disp_ctrl_test;
 		#800 $finish;   
 	end
 
-	//initial $monitor("addr=%d an=%b seg=%b",uut.addr, an, seg);
-
-	always @ (seg) $display("digits[%0d]=%a an=%b seg=%b", uut.addr, uut.digits[uut.addr], an, seg);
+	always @ (seg) $display("digits[%0d]=%h an=%b seg=%b", uut.addr, uut.digits[uut.addr], an, seg);
 endmodule
 

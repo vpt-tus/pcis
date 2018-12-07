@@ -2,7 +2,7 @@
 
 module fibonacci_test;
 
-	localparam N = 10;
+	localparam N = 16;
 
 	logic clk = 0;
 	logic reset;
@@ -11,12 +11,14 @@ module fibonacci_test;
 	fibonacci #(.N(N)) uut(.*);
 
 	initial forever #50 clk = ~clk;
-	initial $monitor("%d",fn);
-
+	initial $display("Max number: %d",uut.MAX_NUMBER);
 	initial begin
 		reset = 1;
 		#100 reset = 0;
-		#2000 $finish;
 	end
 
+	always @ (posedge(clk)) begin
+		$display("fn=%d", fn);
+		if(uut.stop_r) $finish;
+	end
 endmodule
