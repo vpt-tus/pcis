@@ -4,7 +4,8 @@ module disp_ctrl #(parameter D=4)(
 	input [D-1:0][3:0] digits,
 	output logic [D-1:0] an,
 	output logic [6:0] seg
-	);
+);
+
 	localparam ADDR_SIZE = $clog2(D);
 	logic [ADDR_SIZE-1:0] addr;
 	logic [3:0] active_digit;
