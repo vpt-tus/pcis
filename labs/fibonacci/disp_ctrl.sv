@@ -15,7 +15,7 @@ module disp_ctrl #(parameter D=4)(
 		else
 			addr = addr - 1;
 
-assign active_digit = digits[addr];
+	assign active_digit = digits[addr];
 
 	always_comb
 		case (addr)
