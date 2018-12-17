@@ -1,6 +1,7 @@
 # ПЦИС Лабораторна работа - ред на Фибоначи
 
 ![блокова схема](fibonacci-block.png)
+![блокова схема](fibonacci-sch.png)
 
 ## Задача 1
 
@@ -13,7 +14,6 @@
 Симулирайте модула `fibonacci_test`
 
 ![fibonacci_test simulation](fibonacci-sim-dec.png)
-![fibonacci_test simulation](fibonacci-sim-hex.png)
 
 Генерирайте файл за програмиране на FPGA схемата и го заредете в експерименталната платка
 

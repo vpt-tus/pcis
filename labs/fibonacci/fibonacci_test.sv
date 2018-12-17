@@ -2,7 +2,7 @@
 
 module fibonacci_test;
 
-	localparam N = 16;
+	localparam N = 13;
 
 	logic clk = 0;
 	logic reset;
@@ -19,6 +19,6 @@ module fibonacci_test;
 
 	always @ (posedge(clk)) begin
 		$display("fn=%d", fn);
-		if(uut.stop_r) $finish;
+		if(uut.mode == uut.STOP) $finish;
 	end
 endmodule
