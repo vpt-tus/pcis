@@ -90,5 +90,6 @@
 !*.bat
 !*.cmd
 !*.png
+!*.jpg
 !*.md
 !README
