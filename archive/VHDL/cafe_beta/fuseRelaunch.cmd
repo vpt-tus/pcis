@@ -1,0 +1,1 @@
+-intstyle "ise" -incremental -o "C:/Users/vasko/Documents/GitHub/mpis/cafe_beta/cafe_control_tb_isim_beh.exe" -prj "C:/Users/vasko/Documents/GitHub/mpis/cafe_beta/cafe_control_tb_beh.prj" "work.cafe_control_tb" 

@@ -1,0 +1,8 @@
+# compile vhdl design source files
+vhdl xil_defaultlib  "../../../../../utils/clock_divider.vhd"
+vhdl xil_defaultlib  "../../../../johnson.vhd"
+vhdl xil_defaultlib  "../../../../experiment.vhd"
+vhdl xil_defaultlib  "../../../../johnson_tb.vhd"
+
+# Do not sort compile order
+nosort
