@@ -1,4 +1,4 @@
-call C:\Xilinx\Vivado\2018.2\settings64.bat
+call C:\Xilinx\Vivado\2019.1\settings64.bat
 call xvlog -sv -nolog comparator.sv;
 if ERRORLEVEL 1 (
   exit

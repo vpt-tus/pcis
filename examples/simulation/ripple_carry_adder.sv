@@ -35,7 +35,7 @@ endmodule
 
 module ripple_carry_adder_test_1;
 
-	localparam OP_WIDTH = 7;
+	localparam OP_WIDTH = 3;
 
 	logic carry_in, carry_out;
 	logic [OP_WIDTH-1:0] op1, op2, sum;
