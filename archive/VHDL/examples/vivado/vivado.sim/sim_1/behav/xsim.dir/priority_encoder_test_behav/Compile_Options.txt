@@ -1,1 +1,0 @@
--wto "90b38a8267074ccfa3e6b3f945cf1799" --debug "typical" --relax -L "xil_defaultlib" -L "secureip" --snapshot "priority_encoder_test_behav" "xil_defaultlib.priority_encoder_test" -log "elaborate.log" 

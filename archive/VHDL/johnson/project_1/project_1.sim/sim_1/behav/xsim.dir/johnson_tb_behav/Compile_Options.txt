@@ -1,1 +1,0 @@
--wto "de5b8168d0134b1f9f5e30162a5f74d6" --debug "typical" --relax --mt "2" -L "xil_defaultlib" -L "secureip" --snapshot "johnson_tb_behav" "xil_defaultlib.johnson_tb" -log "elaborate.log" 
