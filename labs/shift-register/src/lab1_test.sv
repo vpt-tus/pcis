@@ -2,21 +2,21 @@
 
 module lab1_test;
 
-	localparam N = 5;
+  localparam N = 5;
 
-	logic clock = 0;
-	logic reset;
-	logic [N-1:0] sr;
+  logic clock = 0;
+  logic reset;
+  logic [N-1:0] sr;
 
-	lab1a #(.WIDTH(N)) uut(.*);
+  lab1a #(.WIDTH(N)) uut(.*);
 
-	initial forever #50 clock = ~clock;
-	initial $monitor("%b",sr);
+  initial forever #50 clock = ~clock;
+  initial $monitor("%b",sr);
 
-	initial begin
-		reset = 1;
-		#100 reset = 0;
-		#5000 $finish;
-	end
+  initial begin
+    reset = 1;
+    #100 reset = 0;
+    #5000 $finish;
+  end
 
 endmodule
