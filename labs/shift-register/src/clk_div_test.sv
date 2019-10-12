@@ -9,7 +9,7 @@ module clk_div_test;
 	logic clock_out;
 
 	// Instantiate the Unit Under Test (UUT)
-	clk_div #(.SCALE(100_000_000)) uut (.*);
+	clk_div #(.SCALE(5)) uut (.*);
 
 	initial forever #T clock_in = ~clock_in;
 	initial $monitor("SCALE = %0d, N = %0d", uut.SCALE, uut.N);
