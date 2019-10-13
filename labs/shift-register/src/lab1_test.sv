@@ -16,7 +16,7 @@ module lab1_test;
   initial begin
     reset = 1;
     #100 reset = 0;
-    #5000 $finish;
+    #2000 $finish;
   end
 
 endmodule
