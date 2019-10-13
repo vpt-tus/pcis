@@ -1,6 +1,6 @@
 `timescale 1ns / 1ps
 
-module counter	#(parameter N = 8) (
+module counter #(parameter N = 8) (
   input clock,
   input reset,
   output var logic [N-1:0] cnt

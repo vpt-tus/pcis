@@ -13,7 +13,7 @@ module alu_test;
     #10;
     instr.opc = SUB;
     #10;
-    instr = {MULT,UNSIGNED,24'd12,24'd3};
+    instr = '{MULT,UNSIGNED,24'd12,24'd3};
     #10;
     $finish;
   end
