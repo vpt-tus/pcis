@@ -4,7 +4,7 @@ module lab1_top (
   output [3:0] led
   );
 
-  logic clkock;
+  logic clock;
 
   lab1a #(.WIDTH(4)) u1 (.sr(led), .*);
 

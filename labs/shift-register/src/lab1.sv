@@ -8,9 +8,7 @@ module lab1a #(parameter WIDTH = 8) (
     if(reset)
       sr <= 0;
     else begin
-      sr <= sr << 1;
-      sr[0] <= ~sr[WIDTH-1];
-      //sr <= {sr[WIDTH-2:0], ~sr[WIDTH-1]};
+      sr <= {sr[WIDTH-2:0], ~sr[WIDTH-1]};
     end
 
 endmodule
