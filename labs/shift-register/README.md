@@ -51,6 +51,10 @@ module lab1_top (
 
 1.3 Симулирайте модула lab1_test
 
+![lab1a simulation](vivado-sim.png)
+![lab1a simulation](vivado-sim-1.png)
+![lab1a simulation](vivado-sim-2.png)
+![lab1a simulation](vivado-sim-3.png)
 ![lab1a simulation](lab1a_sim.png)
 
 1.4 Генерирайте файл за програмиране на FPGA схемата и го заредете в експерименталната платка
