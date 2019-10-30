@@ -1,6 +1,6 @@
 `timescale 10ns / 1ns
 
-module gray2bin #(parameter SIZE = 8)(
+module gray2bin_gen #(parameter SIZE = 8)(
   output [SIZE-1:0] bin,
   input [SIZE-1:0] gray
 );
@@ -9,11 +9,21 @@ module gray2bin #(parameter SIZE = 8)(
 
 endmodule
 
+module gray2bin #(parameter SIZE = 8)(
+  output [SIZE-1:0] bin,
+  input [SIZE-1:0] gray
+);
+  always_comb
+    for (i=0; i<SIZE; i=i+1)
+      bin[i] = ^gray[SIZE-1:i];
+
+endmodule
+
 module gray2bin_5bit (
   output [4:0] bin,
   input [4:0] gray
 );
-  gray2bin #(.SIZE(5)) uut (.*);
+  gray2bin_gen #(.SIZE(5)) uut (.*);
 
 endmodule
 

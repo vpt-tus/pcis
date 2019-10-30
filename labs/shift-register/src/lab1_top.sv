@@ -1,12 +1,12 @@
 module lab1_top (
   input clk_100,
   input reset,
-  output [3:0] led
+  output [15:0] led
   );
 
   logic clock;
 
-  lab1a #(.WIDTH(4)) u1 (.sr(led), .*);
+  lab1a #(.WIDTH(16)) u1 (.sr(led), .*);
 
   clk_div #(.SCALE(100_000_000/16)) div (
     .clock_in(clk_100),
