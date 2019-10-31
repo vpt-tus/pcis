@@ -15,19 +15,17 @@ module decimal_counter_test;
     #100;
     reset = 1;
     #T reset = 0;
-
-    // for(int l=0; l<10; l++)
-    //   for(int k=0; k<10; k++)
-    //     for(int j=0; j<10; j++)
-    //       for(int i=0; i<10; i++) begin
-    //         @(negedge clock) 
-    //         assert (digits[0]==i && digits[1]==j && digits[2]==k && digits[3]==l) else $error("expected %1d%1d%1d%1d actual %4h ",l,k,j,i,digits);
-    //       end
+    for(int l=0; l<10; l++)
+      for(int k=0; k<10; k++)
         for(int j=0; j<10; j++)
           for(int i=0; i<10; i++) begin
             @(negedge clock) 
-            assert (digits[0]==i && digits[1]==j) else $error("expected %1d%1d actual %4h ",j,i,digits);
+            assert (digits[3]==l && digits[2]==k && digits[1]==j && digits[0]==i ) else $error("expected %1d%1d%1d%1d actual %4h ",l,k,j,i,digits);
           end
+
+    @(negedge clock)
+    assert (digits == '0) else $error("expected digits=0000 actual digits=%4d",digits);
+
     $finish;
   end
 

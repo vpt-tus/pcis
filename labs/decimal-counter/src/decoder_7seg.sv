@@ -1,6 +1,6 @@
   module decoder_7seg(
     input [3:0] digit,
-    output reg [6:0] segments);
+    output logic [6:0] segments);
 
   // segment encoding
   //      0

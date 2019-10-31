@@ -1,15 +1,13 @@
 module top(
   input clk_100,
   input reset,
-  input btnU,
-  output logic an[3:0],
-  output logic seg[6:0]);
+  output logic [3:0] an,
+  output logic [6:0] seg);
 
-  logic rest, clock;
-  logic [3:0][3:0] digits;
-  assign reset = btnU;
+  logic clock;
+  logic[3:0][3:0] digits;
 
-  decimal_counter u1 (.*, .clock(clock_500Hz));
+  decimal_counter u1 (.*, .clock(clock_10Hz));
   
   clk_div #(.SCALE(50000)) u2(
   .clock_in(clk_100),
@@ -19,13 +17,14 @@ module top(
   clk_div #(.SCALE(25)) u3(
   .clock_in(clock_500Hz),
   .clock_out(clock_10Hz),
-  .reset(reset);
+  .reset(reset));
 
   display_controller u4(
     .clock(clock_500Hz),
     .reset(reset),
     .din(digits),
-    .dout(one_digit));
+    .dout(one_digit),
+    .an(an));
 
   decoder_7seg u5(
     .digit(one_digit),

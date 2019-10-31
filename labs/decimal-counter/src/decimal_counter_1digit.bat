@@ -4,5 +4,5 @@ if ERRORLEVEL 1 (
   exit
 )
 call xelab -R -s decimal_counter decimal_counter_1digit -nolog -debug all decimal_counter_1digit_test
-del *.jou,*.log
 rem call xsim decimal_counter_1digit -gui
+del *.jou,*.log,*.wdb,*.pb
