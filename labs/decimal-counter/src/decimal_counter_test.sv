@@ -2,7 +2,7 @@ module decimal_counter_test;
   logic clock, reset;
   logic [3:0][3:0] digits;
 
-  decimal_counter_v3 uut(.*);
+  decimal_counter uut(.*);
 
   localparam T = 100;
 
