@@ -1,23 +1,10 @@
-`timescale 10ns / 1ns
+import bcd::*;
 
-typedef logic [3:0] bcd_t;
-
-module bcd_adder(
-  input bcd_t a,b,
-  input cin,
-  output bcd_t s,
-  output logic cout
-);
-
-  // TODO
-  
-endmodule
-
-module bcd_adder_test;
+module bcd_adder_1d_test;
   bcd_t a, b, s;
   logic cin, cout;
 
-  bcd_adder uut(.*);
+  bcd_adder_1d uut(.*);
 
   task test_vector (
     input bcd_t a_test, b_test,
@@ -30,7 +17,7 @@ module bcd_adder_test;
     cin = cin_test;
 
     #10 assert ((s_expected == s) && (cout_expected == cout))
-    else $warning("%0d + %0d + %0d = expected %0d%0d but was %0d%0d",a_test, b_test, cin_test, cout_expected, s_expected,cout,s);
+    else $error("%0d + %0d + %0d = expected %0d%0d but was %0d%0d",a_test, b_test, cin_test, cout_expected, s_expected, cout, s);
   endtask
 
   initial begin
