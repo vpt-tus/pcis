@@ -31,5 +31,5 @@ module edge_detector_test1;
     $timeformat(-9, 2, " ns", 10);
     $monitor("%t sig=%b, tick=%b",$time,sig,tick);
   end
-  
+
 endmodule

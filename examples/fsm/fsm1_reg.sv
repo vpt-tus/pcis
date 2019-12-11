@@ -18,12 +18,12 @@ always_comb begin
       IDLE:
         if (go) state_next = READ;
         else state_next = IDLE;
-      READ: 
+      READ:
         state_next = DELAY;
       DELAY:
         if (ws) state_next = READ;
         else state_next = DONE;
-      DONE: 
+      DONE:
         state_next = IDLE;
     endcase
 end

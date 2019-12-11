@@ -12,13 +12,13 @@ module edge_detector(
     state_next = state;
     tick = 0;
     case (state)
-      IDLE: 
+      IDLE:
         if (sig) state_next = EDGE;
       EDGE: begin
         tick = 1;
         state_next = WAIT_ZERO;
       end
-      WAIT_ZERO: 
+      WAIT_ZERO:
         if (~sig) state_next = IDLE;
     endcase
   end

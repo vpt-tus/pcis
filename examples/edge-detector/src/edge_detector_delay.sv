@@ -20,7 +20,7 @@ module edge_detector_delay #(parameter DELAY=10)(
     timer_next = timer;
     tick = 0;
     case (state)
-      IDLE: 
+      IDLE:
         if (sig) state_next = EDGE;
       EDGE: begin
         tick = 1;
@@ -31,7 +31,7 @@ module edge_detector_delay #(parameter DELAY=10)(
         if (timer) timer_next = timer - 1;
         else state_next = WAIT_ZERO;
       end
-      WAIT_ZERO: 
+      WAIT_ZERO:
         if (~sig) state_next = IDLE;
     endcase
   end

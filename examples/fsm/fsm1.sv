@@ -16,22 +16,22 @@ module fsm1(
       ds = '0;
       rd = '0;
       case (state)
-				IDLE: 
-					if (go) state_next = READ;
-					else state_next = IDLE;
-				READ: begin 
-					rd = '1;
-					state_next = DELAY;
-				end
-				DELAY: begin 
-					rd = '1;
-					if (ws) state_next = READ;
-					else state_next = DONE;
-				end
-				DONE: begin 
-					ds = '1;
-					state_next = IDLE;
-				end
+        IDLE:
+          if (go) state_next = READ;
+          else state_next = IDLE;
+        READ: begin
+          rd = '1;
+          state_next = DELAY;
+        end
+        DELAY: begin
+          rd = '1;
+          if (ws) state_next = READ;
+          else state_next = DONE;
+        end
+        DONE: begin
+          ds = '1;
+          state_next = IDLE;
+        end
       endcase
     end
 endmodule
