@@ -1,12 +1,11 @@
 module single_shot(
-  input clk, rst, sig,
-  output logic tick );
+  input clock, reset, sig,
+	output logic tick);
 
   enum logic [1:0] {IDLE, EDGE, WAIT_ZERO} state, state_next;
-  logic [5:0] timer, timer_next;
 
-  always_ff @(posedge clk, posedge rst)
-    if (rst) begin
+  always_ff @(posedge clock, posedge reset)
+    if (reset) begin
       state <= IDLE;
     end
     else begin
@@ -22,9 +21,9 @@ module single_shot(
       EDGE: begin
         tick = 1;
         state_next = WAIT_ZERO;
-			end
-			WAIT_ZERO:
-				if (~sig) state_next = IDLE;
+      end
+      WAIT_ZERO:
+        if (~sig) state_next = IDLE;
     endcase
   end
 

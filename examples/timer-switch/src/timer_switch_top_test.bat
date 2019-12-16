@@ -3,9 +3,9 @@ call xvlog -sv -nolog timer_switch.sv timer_switch_top.sv single_shot.sv timer_s
 if ERRORLEVEL 1 (
   exit
 )
-call xelab -R -s timer_switch_top -nolog -debug all timer_switch_top_test
+call xelab -R -s timer_switch_top_test -nolog -debug all timer_switch_top_test
 del *.jou,*.log
 if ERRORLEVEL 1 (
   exit
 )
-call xsim timer_switch_top -gui
+rem call xsim timer_switch_top_test -gui

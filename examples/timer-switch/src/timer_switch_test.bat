@@ -8,4 +8,4 @@ del *.jou,*.log
 if ERRORLEVEL 1 (
   exit
 )
-call xsim timer_switch -gui
+rem call xsim timer_switch -gui

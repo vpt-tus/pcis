@@ -1,5 +1,5 @@
 module timer_switch_test;
-  logic clock, reset, btn;
+  logic clock_1Hz, reset, btn;
   logic light;
 
   timer_switch uut(.*);
@@ -7,9 +7,9 @@ module timer_switch_test;
   parameter T = 10;
 
   initial begin
-    clock = 0;
+    clock_1Hz = 0;
     forever begin
-      #(T/2) clock = ~clock;
+      #(T/2) clock_1Hz = ~clock_1Hz;
     end
   end
 
@@ -43,7 +43,7 @@ module timer_switch_test;
   end
 
   task test (string expected_state, logic expected_light);
-    @(negedge clock);
+    @(negedge clock_1Hz);
     assert(uut.state.name == expected_state) else $error("state - expected: %s, actual: %s", expected_state, uut.state.name);
     assert(light == expected_light) else $error("light - expected: %b, actual: %b", expected_light, light);
   endtask
