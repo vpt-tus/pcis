@@ -1,6 +1,6 @@
 module single_shot(
   input clock, reset, sig,
-	output logic tick);
+  output logic tick);
 
   enum logic [1:0] {IDLE, EDGE, WAIT_ZERO} state, state_next;
 
