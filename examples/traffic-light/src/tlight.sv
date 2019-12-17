@@ -3,7 +3,8 @@ module tlight(
   output logic [2:0] ns, we
 );
 
-  enum {s1, s2, s3, s4} state, next_state;
+  typedef enum logic[2:0] {s1, s2, s3, s4} state_type;
+  state_type state, next_state;
 
   logic [3:0] timer, next_timer;
 

@@ -1,4 +1,4 @@
-module tlight_test;
+module tlight_test_1;
   logic clock, reset;
   logic [2:0] ns, we;
 
