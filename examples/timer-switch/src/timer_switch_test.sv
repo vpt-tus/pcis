@@ -12,7 +12,8 @@ module timer_switch_test;
       #(T/2) clock_1Hz = ~clock_1Hz;
     end
   end
-
+  
+  // Test with immediate assertionst
   initial begin
     btn = 0;
     reset = 1;

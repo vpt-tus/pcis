@@ -26,21 +26,44 @@ module single_shot_test;
     #(5*T) $finish();
   end;
   
-  assert property(@(posedge clock) reset |=> (uut.state == uut.IDLE) and ~tick);
-  
-  // the next two assertions a re equivalent
-  assert property(@(posedge clock) uut.state == uut.EDGE |-> ##1 uut.state == uut.WAIT_ZERO);
-  assert property(@(posedge clock) uut.state == uut.EDGE |=> uut.state == uut.WAIT_ZERO);
+  // check FSM state after reset
+  property after_reset_state_is_idle;
+    @(posedge clock) reset |=> (uut.state == uut.IDLE) and ~tick;
+  endproperty
+  ap_after_reset_state_is_idle: assert property(after_reset_state_is_idle);
 
-  assert property(@(posedge clock) sig ##1 ~sig |-> uut.state == uut.WAIT_ZERO ##1 uut.state == uut.IDLE);
+  // check FSM state transition IDLE -> EDGE
+  property after_sig_goes_up_the_state_is_EDGE;
+    disable iff (reset)
+    @(posedge clock) ~sig ##1 sig |=> uut.state == uut.EDGE;
+  endproperty;
+  ap_after_sig_goes_up_the_state_is_EDGE: assert property(after_sig_goes_up_the_state_is_EDGE);
 
+  // check FSM state transition EDGE -> WAIT_ZERO
+  ap_state_edge_duration_is_one_cycle: assert property(
+    @(posedge clock) uut.state == uut.EDGE |-> ##1 uut.state == uut.WAIT_ZERO);
+
+
+  // check FSM state transition WAIT_ZERO -> IDLE
+  property after_sig_goes_down_the_state_is_IDLE;
+    @(posedge clock) sig ##1 ~sig |-> uut.state == uut.WAIT_ZERO ##1 uut.state == uut.IDLE;
+  endproperty;
+  ap_after_sig_goes_down_the_state_is_IDLE: assert property(after_sig_goes_down_the_state_is_IDLE);
+
+  // check that 0 -> 1 on 'sig' leads to pulse on 'tick'
   sequence sig_rise;
     ~sig ##1 sig;
   endsequence;
+  
   sequence one_period_pulse_on_tick;
     ~tick ##1 tick ##1 ~tick;
   endsequence;
-  assert property(@(posedge clock) sig_rise |-> one_period_pulse_on_tick);
+  
+  property sig_rise_causes_pulse_on_tick;
+    @(posedge clock) sig_rise |-> one_period_pulse_on_tick;
+  endproperty
 
-  // initial $monitor("%b %b %b", clock, sig, tick);
+  ap_sig_rise_causes_pulse_on_tick: assert property(sig_rise_causes_pulse_on_tick);
+
+  // initial $monitor("sig=%b state=%s", sig, uut.state.name);
 endmodule
