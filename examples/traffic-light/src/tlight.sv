@@ -3,10 +3,10 @@ module tlight(
   output logic [2:0] ns, we
 );
 
-  typedef enum logic[2:0] {s1, s2, s3, s4} state_type;
-  state_type state, next_state;
+  typedef enum logic[2:0] {RESET, WE_READY_TO_GO, WE_GO, WE_PREPARE_TO_STOP, NS_READY_TO_GO, NS_GO, NS_PREPARE_TO_STOP} state_type;
+  state_type state, state_next;
 
-  logic [3:0] timer, next_timer;
+  logic [3:0] timer, timer_next;
 
   parameter RED = 3'b100, YELLOW = 3'b010, GREEN = 3'b001;
   parameter YELLOW_DURATION = 2; // 3s
@@ -14,61 +14,82 @@ module tlight(
 
   always_ff @(posedge clock or posedge reset) begin
     if(reset) begin
-      state <= s1;
+      state <= RESET;
     end
     else begin
-      state <= next_state;
+      state <= state_next;
     end
   end
 
   always_ff @(posedge clock or posedge reset) begin
     if(reset) begin
-      timer <= YELLOW_DURATION;
+      timer <= '0;
     end
     else begin
-      if(timer==0)
-        timer <= next_timer;
-      else
-        timer <= timer - 1;
+      timer <= timer_next;
     end
   end
 
   always_comb begin
-    next_state = state;
+    state_next = state;
 
     case (state)
-      s1: begin
-        ns = YELLOW;
-        we = YELLOW;
-        if(timer==0)begin
-          next_state = s2;
-          next_timer = RED_GREEN_DURATION;
-        end
+      RESET: begin
+        ns = RED;
+        we = RED;
+        timer_next = YELLOW_DURATION;
+        state_next = WE_READY_TO_GO;
       end
-      s2: begin
+      WE_READY_TO_GO: begin
+        ns = RED;
+        we = YELLOW;
+        if(timer_next==0)begin
+          state_next = WE_GO;
+          timer_next = RED_GREEN_DURATION;
+        end
+        else
+          timer_next = timer - 1;
+      end
+      WE_GO: begin
         ns = RED;
         we = GREEN;
-        if(timer==0)begin
-          next_state = s3;
-          next_timer = YELLOW_DURATION;
+        if(timer_next==0)begin
+          state_next = WE_PREPARE_TO_STOP;
         end
+        else
+          timer_next = timer - 1;
       end
-      s3: begin
+      WE_PREPARE_TO_STOP: begin
+        ns = RED;
+        we = YELLOW;        
+        state_next = NS_READY_TO_GO;
+        timer_next = YELLOW_DURATION;
+      end
+      NS_READY_TO_GO: begin
         ns = YELLOW;
-        we = YELLOW;
-        if(timer==0)begin
-          next_state = s4;
-          next_timer = RED_GREEN_DURATION;
+        we = RED;
+        if(timer_next==0)begin
+          state_next = NS_GO;
+          timer_next = RED_GREEN_DURATION;
         end
+        else
+          timer_next = timer - 1;
       end
-      s4: begin
+      NS_GO: begin
         ns = GREEN;
         we = RED;
-        if(timer==0)begin
-          next_state = s1;
-          next_timer = YELLOW_DURATION;
+        if(timer_next==0)begin
+          state_next = NS_PREPARE_TO_STOP;
+          timer_next = YELLOW_DURATION;
         end
+        else
+          timer_next = timer - 1;
       end
+      NS_PREPARE_TO_STOP: begin
+        ns = YELLOW;
+        we = RED;        
+        state_next = WE_READY_TO_GO;
+      end      
     endcase
   end
 endmodule

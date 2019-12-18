@@ -19,39 +19,46 @@ module tlight_test_2;
     #(50*T) $finish;
   end
 
-  // check that after reset the fsm is in state s1
-  property after_reset_state_s1;
-    @(posedge clock) $fell(reset) |-> uut.state == uut.s1;
+  property after_reset_state;
+    @(posedge clock) $fell(reset) |-> uut.state == uut.RESET;
   endproperty;
-  ap_after_reset_state_s1: assert property(after_reset_state_s1);
+  ap_after_reset_state: assert property(after_reset_state);
 
-  // check the duration of s1
-  property check_s1_duration;
-    @(posedge clock) uut.state != uut.s1 ##1 uut.state == uut.s1 |-> uut.state==uut.s1 [*3] ##1 uut.state==uut.s2;
+  property check_WE_READY_TO_GO_duration;
+    @(posedge clock) uut.state == uut.RESET ##1 uut.state == uut.WE_READY_TO_GO |-> uut.state==uut.WE_READY_TO_GO [*3] ##1 uut.state==uut.WE_GO;
   endproperty;
-  property check_s1_duration_alt;
-    @(posedge clock) uut.state == uut.s1 ##1 uut.state == uut.s2 |-> $past(uut.state==uut.s1,3);
+  property check_WE_READY_TO_GO_duration_alt;
+    @(posedge clock) uut.state == uut.WE_READY_TO_GO ##1 uut.state == uut.WE_GO |-> $past(uut.state==uut.WE_READY_TO_GO,2);
   endproperty;
+  ap_check_WE_READY_TO_GO_duration: assert property(check_WE_READY_TO_GO_duration);
+  ap_check_WE_READY_TO_GO_duration_alt: assert property(check_WE_READY_TO_GO_duration_alt);
 
-  // check the duration of s2 - after the s1 to s2 transition, the fsm stays in s2 for 15 clock cycles then jumps to s3
-  property check_s2_duration;
-    @(posedge clock) uut.state == uut.s1 ##1 uut.state == uut.s2 |-> uut.state==uut.s2 [*15] ##1 uut.state==uut.s3;
+  property check_WE_GO_duration;
+    @(posedge clock) uut.state == uut.WE_READY_TO_GO ##1 uut.state == uut.WE_GO |-> uut.state==uut.WE_GO [*15] ##1 uut.state==uut.WE_PREPARE_TO_STOP;
   endproperty;
+  ap_check_WE_GO_duration: assert property(check_WE_GO_duration);
 
-    // check the duration of s3 - after the s2 to s3 transition, the fsm stays in s3 for 3 clock cycles then jumps to s4
-  property check_s3_duration;
-    @(posedge clock) uut.state == uut.s2 ##1 uut.state == uut.s3 |-> uut.state==uut.s3 [*3] ##1 uut.state==uut.s4;
+  property check_WE_PREPARE_TO_STOP_duration;
+    @(posedge clock) uut.state == uut.WE_GO ##1 uut.state == uut.WE_PREPARE_TO_STOP |-> uut.state==uut.WE_PREPARE_TO_STOP ##1 uut.state==uut.NS_READY_TO_GO;
   endproperty;
+  ap_check_WE_PREPARE_TO_STOP_duration: assert property(check_WE_PREPARE_TO_STOP_duration);
 
-  // check the duration of s4 - after the s2 to s3 transition, the fsm stays in s4 for 15 clock cycles then jumps to s1
-  property check_s4_duration;
-    @(posedge clock) uut.state == uut.s3 ##1 uut.state == uut.s4 |-> uut.state==uut.s4 [*15] ##1 uut.state==uut.s1; 
+  property check_NS_READY_TO_GO_duration;
+    @(posedge clock) uut.state == uut.WE_PREPARE_TO_STOP ##1 uut.state == uut.NS_READY_TO_GO |-> uut.state==uut.NS_READY_TO_GO [*3] ##1 uut.state==uut.NS_GO; 
   endproperty;
+  ap_check_NS_READY_TO_GO_duration: assert property(check_NS_READY_TO_GO_duration);
 
-  ap_check_s1_duration: assert property(check_s1_duration);
-  ap_check_s2_duration: assert property(check_s2_duration);
-  ap_check_s3_duration: assert property(check_s3_duration);
-  ap_check_s4_duration: assert property(check_s4_duration);
-  ap_check_s1_duration_alt: assert property(check_s1_duration_alt);
+  property check_NS_GO_duration;
+    @(posedge clock) uut.state == uut.NS_READY_TO_GO ##1 uut.state == uut.NS_GO |-> uut.state==uut.NS_GO [*15] ##1 uut.state==uut.NS_PREPARE_TO_STOP; 
+  endproperty;
+  ap_check_NS_GO_duration: assert property(check_NS_GO_duration);
 
+  ap_check_lights_RESET: assert property( @(posedge clock) uut.state==uut.RESET |-> ns==uut.RED and we==uut.RED);
+  ap_check_lights_WE_READY_TO_GO: assert property( @(posedge clock) uut.state==uut.WE_READY_TO_GO |-> ns==uut.RED and we==uut.YELLOW);
+  ap_check_lights_WE_GO: assert property( @(posedge clock) uut.state==uut.WE_GO |-> ns==uut.RED and we==uut.GREEN);
+  ap_check_lights_WE_PREPARE_TO_STOP: assert property( @(posedge clock) uut.state==uut.WE_PREPARE_TO_STOP |-> ns==uut.RED and we==uut.YELLOW);
+  ap_check_lights_NS_READY_TO_GO: assert property( @(posedge clock) uut.state==uut.NS_READY_TO_GO |-> ns==uut.YELLOW and we==uut.RED);
+  ap_check_lights_NS_GO: assert property( @(posedge clock) uut.state==uut.NS_GO |-> ns==uut.GREEN and we==uut.RED);
+
+  // initial $monitor("%s %b", uut.state.name, clock);
 endmodule

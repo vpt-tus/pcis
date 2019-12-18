@@ -1,4 +1,5 @@
 module tlight_test_1;
+  
   logic clock, reset;
   logic [2:0] ns, we;
 
@@ -17,24 +18,25 @@ module tlight_test_1;
     reset = 1;
     #T reset = 0;
 
-    test(uut.s1.name, uut.YELLOW, uut.YELLOW);
+    test(uut.RESET.name, uut.RED, uut.RED);
+    #T test(uut.WE_READY_TO_GO.name, uut.RED, uut.YELLOW);
 
     #(3*T)
-    test(uut.s2.name, uut.RED, uut.GREEN);
+    test(uut.WE_GO.name, uut.RED, uut.GREEN);
 
     #(15*T)
-    test(uut.s3.name, uut.YELLOW, uut.YELLOW);
+    test(uut.WE_PREPARE_TO_STOP.name, uut.RED, uut.YELLOW);
+
+    #T test(uut.NS_READY_TO_GO.name, uut.YELLOW, uut.RED);
 
     #(3*T)
-    test(uut.s4.name, uut.GREEN, uut.RED);
+    test(uut.NS_GO.name, uut.GREEN, uut.RED);
 
     #(15*T)
-    test(uut.s1.name, uut.YELLOW, uut.YELLOW);
+    test(uut.NS_PREPARE_TO_STOP.name, uut.YELLOW, uut.RED);
+
+    #T test(uut.WE_READY_TO_GO.name, uut.RED, uut.YELLOW);
   end
-
-  // initial begin
-  // 	$monitor("reset=%b clock=%b state=%s timer=%d",reset, clock, uut.state.name, uut.timer);
-  // end
 
   initial begin
     #(50*T) $finish();
