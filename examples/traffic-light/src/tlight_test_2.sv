@@ -27,6 +27,9 @@ module tlight_test_2;
 
   // check the duration of s1
   property check_s1_duration;
+    @(posedge clock) uut.state != uut.s1 ##1 uut.state == uut.s1 |-> uut.state==uut.s1 [*3] ##1 uut.state==uut.s2;
+  endproperty;
+  property check_s1_duration_alt;
     @(posedge clock) uut.state == uut.s1 ##1 uut.state == uut.s2 |-> $past(uut.state==uut.s1,3);
   endproperty;
 
@@ -49,5 +52,6 @@ module tlight_test_2;
   ap_check_s2_duration: assert property(check_s2_duration);
   ap_check_s3_duration: assert property(check_s3_duration);
   ap_check_s4_duration: assert property(check_s4_duration);
+  ap_check_s1_duration_alt: assert property(check_s1_duration_alt);
 
 endmodule
