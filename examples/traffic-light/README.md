@@ -12,7 +12,7 @@
 
 ### версия 2
 
-![ASMD](traffic-light-v2.png)
+![ASMD](asmd2.png)
 
 ## Симулация
 
