@@ -1,4 +1,4 @@
-call C:\Xilinx\Vivado\2019.1\settings64.bat
+call C:\Xilinx\Vivado\2020.1\settings64.bat
 call xvlog -sv -nolog clk_div_test.sv clk_div.sv 
 if ERRORLEVEL 1 (
   exit

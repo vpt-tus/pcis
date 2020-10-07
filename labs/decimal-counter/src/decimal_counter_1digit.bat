@@ -1,4 +1,4 @@
-call C:\Xilinx\Vivado\2019.1\settings64.bat
+call C:\Xilinx\Vivado\2020.1\settings64.bat
 call xvlog -sv -nolog decimal_counter_1digit.sv decimal_counter_1digit_test.sv;
 if ERRORLEVEL 1 (
   exit
