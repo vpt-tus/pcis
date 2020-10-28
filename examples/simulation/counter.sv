@@ -50,7 +50,7 @@ module counter_test_2;
   localparam size = 2;
 
   logic clock, reset;
-  logic [size-1:0] cnt;
+  logic [size-1:0] cnt, expected;
 
   // Instantiate the Unit Under Test (UUT)
   counter #(.N(size)) uut (.*);
@@ -63,11 +63,11 @@ module counter_test_2;
   initial begin
     reset = 1;
     #100 reset = 0;
-    @(negedge clock); assert (cnt == 0) else $error("cnt: expected=%1d, actual=%1d",0,cnt);
-    @(negedge clock); assert (cnt == 1) else $error("cnt: expected=%1d, actual=%1d",1,cnt);
-    @(negedge clock); assert (cnt == 2) else $error("cnt: expected=%1d, actual=%1d",2,cnt);
-    @(negedge clock); assert (cnt == 3) else $error("cnt: expected=%1d, actual=%1d",3,cnt);
-    @(negedge clock); assert (cnt == 0) else $error("cnt: expected=%1d, actual=%1d",0,cnt);
+    @(negedge clock); expected=0; assert (cnt == expected) else $error("cnt: expected=%1d, actual=%1d",expected,cnt);
+    @(negedge clock); expected=1; assert (cnt == expected) else $error("cnt: expected=%1d, actual=%1d",expected,cnt);
+    @(negedge clock); expected=2; assert (cnt == expected) else $error("cnt: expected=%1d, actual=%1d",expected,cnt);
+    @(negedge clock); expected=3; assert (cnt == expected) else $error("cnt: expected=%1d, actual=%1d",expected,cnt);     
+    @(negedge clock); expected=0; assert (cnt == expected) else $error("cnt: expected=%1d, actual=%1d",expected,cnt);       
     $display("Test passed");
     $finish;
   end

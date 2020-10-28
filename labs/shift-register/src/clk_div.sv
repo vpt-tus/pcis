@@ -1,4 +1,5 @@
 // SCALE - pulses per half-period
+// fout = fin / (SCALE * 2)
 module clk_div #(parameter SCALE = 2)(
   input clock_in,
   input reset,

@@ -9,9 +9,10 @@ module clk_div_test;
   logic clock_out;
 
   // Instantiate the Unit Under Test (UUT)
-  clk_div #(.SCALE(5)) uut (.*);
+  clk_div #(.SCALE(3)) uut (.*);
 
-  initial forever #T clock_in = ~clock_in;
+//  initial forever #T clock_in = ~clock_in;
+  always #T clock_in = ~clock_in;
   initial $monitor("SCALE = %0d, N = %0d", uut.SCALE, uut.N);
   initial $monitor("%b %b %d",clock_in, clock_out, uut.count);
   
@@ -19,7 +20,7 @@ module clk_div_test;
     reset = 1;
     // Wait 100 ns for global reset to finish
     #100 reset = 0;
-    #(50*T) $finish;
+    #(30*T) $finish;
   end
 endmodule
 
