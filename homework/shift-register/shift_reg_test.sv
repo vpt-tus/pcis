@@ -2,7 +2,7 @@
 
 module shift_reg_test;
 
-  localparam N = 5;
+  localparam N = 8;
 
   logic clock = 0;
   logic reset;
@@ -17,7 +17,7 @@ module shift_reg_test;
   initial begin
     reset = 1;
     #100 reset = 0;
-    #2000 $finish;
+    #3000 $finish;
   end
 
 endmodule

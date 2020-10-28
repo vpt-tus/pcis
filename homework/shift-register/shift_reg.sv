@@ -1,5 +1,5 @@
 
-module shift_reg #(parameter N) (
+module shift_reg #(parameter N = 4) (
   input clock, reset,
   output logic [N-1:0] sr
 );
