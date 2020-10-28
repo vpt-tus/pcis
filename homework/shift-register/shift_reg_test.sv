@@ -2,22 +2,23 @@
 
 module shift_reg_test;
 
-  localparam N = 8;
+  localparam N = 8; // Register width
+  localparam T = 100; // Clock period
 
   logic clock = 0;
-  logic reset;
-  logic [N-1:0] sr;
+  logic reset; // Active high
+  logic [N-1:0] sr; // Shift register content
 
   shift_reg #(.N(N)) uut(.*);
 
-  always #50 clock = ~clock;
+  always #(T/2) clock = ~clock;
 
-  initial $monitor("%b",sr);
+  initial $monitor("%b", sr);
 
   initial begin
     reset = 1;
-    #100 reset = 0;
-    #3000 $finish;
+    #T reset = 0;
+    #(32*T) $finish;
   end
 
 endmodule
