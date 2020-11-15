@@ -1,36 +1,40 @@
-module tlight(
+import tlight_package::*;
+
+module tlight_v2(
   input clock, reset, // clock period is 1s
-  output logic [2:0] ns, we
+  output tlight_control_t ns, we
 );
 
-  typedef enum logic[2:0] {RESET, WE_READY_TO_GO, WE_GO, WE_PREPARE_TO_STOP, NS_READY_TO_GO, NS_GO, NS_PREPARE_TO_STOP} state_type;
-  state_type state, state_next;
+  enum logic[2:0] {
+    RESET, 
+    WE_READY_TO_GO, 
+    WE_GO, 
+    WE_PREPARE_TO_STOP, 
+    NS_READY_TO_GO, 
+    NS_GO, 
+    NS_PREPARE_TO_STOP} state, state_next;
 
   logic [3:0] timer, timer_next;
 
-  parameter RED = 3'b100, YELLOW = 3'b010, GREEN = 3'b001;
   parameter YELLOW_DURATION = 2; // 3s
   parameter RED_GREEN_DURATION = 14; // 15s
 
-  always_ff @(posedge clock or posedge reset) begin
-    if(reset) begin
+  // State register
+  always_ff @(posedge clock or posedge reset) 
+    if (reset) 
       state <= RESET;
-    end
-    else begin
+    else
       state <= state_next;
-    end
-  end
 
-  always_ff @(posedge clock or posedge reset) begin
-    if(reset) begin
+  // Timer
+  always_ff @(posedge clock or posedge reset) 
+    if (reset)
       timer <= '0;
-    end
-    else begin
+    else
       timer <= timer_next;
-    end
-  end
 
   always_comb begin
+    // Defaults
     state_next = state;
 
     case (state)
