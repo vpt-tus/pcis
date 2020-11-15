@@ -17,18 +17,21 @@ module tlight_test;
     #(100*T) $finish;
   end
 
+  // Check the initial state
   property after_reset_state;
     @(posedge clock) $fell(reset) |-> uut.state == uut.RESET;
   endproperty;
   ap_after_reset_state: assert property(after_reset_state);
 
+  // Check state durations
   property check_WE_READY_TO_GO_duration;
     @(posedge clock) uut.state == uut.RESET ##1 uut.state == uut.WE_READY_TO_GO |-> uut.state==uut.WE_READY_TO_GO [*3] ##1 uut.state==uut.WE_GO;
   endproperty;
+  ap_check_WE_READY_TO_GO_duration: assert property(check_WE_READY_TO_GO_duration);
+
   property check_WE_READY_TO_GO_duration_alt;
     @(posedge clock) uut.state == uut.WE_READY_TO_GO ##1 uut.state == uut.WE_GO |-> $past(uut.state==uut.WE_READY_TO_GO,2);
   endproperty;
-  ap_check_WE_READY_TO_GO_duration: assert property(check_WE_READY_TO_GO_duration);
   ap_check_WE_READY_TO_GO_duration_alt: assert property(check_WE_READY_TO_GO_duration_alt);
 
   property check_WE_GO_duration;
@@ -51,6 +54,7 @@ module tlight_test;
   endproperty;
   ap_check_NS_GO_duration: assert property(check_NS_GO_duration);
 
+  // Verify state -> lights relations
   ap_check_lights_RESET: assert property( @(posedge clock) uut.state==uut.RESET |-> ns==RED and we==RED);
   ap_check_lights_WE_READY_TO_GO: assert property( @(posedge clock) uut.state==uut.WE_READY_TO_GO |-> ns==RED and we==YELLOW);
   ap_check_lights_WE_GO: assert property( @(posedge clock) uut.state==uut.WE_GO |-> ns==RED and we==GREEN);
