@@ -1,51 +1,48 @@
 module timer_switch_test;
-  logic clock_1Hz, reset, btn;
-  logic light;
+  localparam T = 10;
 
-  timer_switch uut(.*);
+  logic clock = 0;
+  logic reset, btn, light;
 
-  parameter T = 10;
+  timer_switch uut(.clock_1Hz(clock), .*);
 
-  initial begin
-    clock_1Hz = 0;
-    forever begin
-      #(T/2) clock_1Hz = ~clock_1Hz;
-    end
-  end
-  
-  // Test with immediate assertionst
+  always #(T/2) clock = ~clock;
+
+  // Test with concurrent assertions
   initial begin
     btn = 0;
     reset = 1;
     #T reset = 0;
 
-    test(uut.OFF.name, 0);
-    #(2*T) test(uut.OFF.name, 0);
+    #T btn = 1;
+    #T btn = 0;
 
-    btn = 1;
-    #(T) btn = 0;
-
-    test(uut.ON.name, 1);
-    #(19*T)	test(uut.ON.name, 1);
-    #(T) test(uut.OFF.name, 0);
-
-    #(2*T) btn = 1;
-    #(T) btn = 0;
+    #(25*T) btn = 1;
+    #T btn = 0;
 
     #(10*T) btn = 1;
     #(T) btn = 0;
-
-    #(19*T) test(uut.ON.name, 1);
-    #(T) test(uut.OFF.name, 0);
+    
+    #(30*T) $finish();
   end
 
-  initial begin
-    #(65*T) $finish();
-  end
+  // Check state after reset
+  assert property(@(posedge clock) reset |-> uut.state == uut.OFF and ~light);
+  
+  // Pressing the button turns on the lights
+  assert property(@(posedge clock) $rose(btn) |=> light);
 
-  task test (string expected_state, logic expected_light);
-    @(negedge clock_1Hz);
-    assert(uut.state.name == expected_state) else $error("state - expected: %s, actual: %s", expected_state, uut.state.name);
-    assert(light == expected_light) else $error("light - expected: %b, actual: %b", expected_light, light);
-  endtask
+  // Check ON duration
+  property light_is_on_for_at_least_20cycles;
+    @(posedge clock) $rose(btn) |=> light [*20];
+  endproperty;
+  assert property (light_is_on_for_at_least_20cycles);
+  
+   
+  // Check ON duration - alternative
+  property light_remains_on_exactly_20cycles_after_the_last_btn_rise;
+    @(posedge clock) disable iff (reset) $fell(light) |-> $past(btn, 21);
+  endproperty;
+  assert property (light_remains_on_exactly_20cycles_after_the_last_btn_rise);
+
 endmodule

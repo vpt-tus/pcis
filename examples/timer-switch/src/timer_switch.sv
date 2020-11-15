@@ -4,56 +4,49 @@ module timer_switch(
   input btn,   // active high, duration of one clock period
   output logic light // 0 - off, 1 - on
 );
-
-  parameter ON_DURATION = 19; // 20s
+  localparam ON_DURATION = 19; // 20s
 
   enum logic {OFF, ON} state, next_state;
-
   logic [4:0] timer, next_timer;
 
   // State register
-  always_ff @(posedge clock_1Hz or posedge reset) begin
-    if(reset) begin
+  always_ff @(posedge clock_1Hz or posedge reset)
+    if (reset)
       state <= OFF;
-    end
-    else begin
+    else
       state <= next_state;
-    end
-  end
 
-  // Timer
-  always_ff @(posedge clock_1Hz or posedge reset) begin
-    if(reset) begin
+  // Timer register
+  always_ff @(posedge clock_1Hz or posedge reset)
+    if (reset)
       timer <= '0;
-    end
-    else begin
+    else
       timer <= next_timer;
-    end
-  end
 
-  always_comb begin
+  always_comb 
+  begin
     next_state = state;
     next_timer = timer;
     case (state)
-      OFF: begin
+      OFF: 
+      begin
         light = '0;
-        if(btn)begin
+        if (btn)
+        begin
           next_state = ON;
           next_timer = ON_DURATION;
           light = '1;
         end
       end
-      ON: begin
+      ON: 
+      begin
         light = '1;
-        if(timer==0)begin
+        if (timer==0)
           next_state = OFF;
-        end
-        else begin
+        else
           next_timer = timer - 1;
-        end
-        if(btn)begin
+        if (btn)
           next_timer = ON_DURATION; // pushing the button while in ON state will reset the timer to ON_DURATION
-        end
       end
     endcase
   end
