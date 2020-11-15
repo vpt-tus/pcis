@@ -9,7 +9,9 @@ module edge_detector(
     else state <= state_next;
 
   always_comb begin
+    // default state
     state_next = state;
+    // default output
     tick = 0;
     case (state)
       IDLE:

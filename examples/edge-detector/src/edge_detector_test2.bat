@@ -5,4 +5,4 @@ if ERRORLEVEL 1 (
 )
 call xelab -R -s test2 -nolog -debug all edge_detector_test2
 del *.jou,*.log
-call xsim test2 -gui
+rem call xsim test2 -gui
