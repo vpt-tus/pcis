@@ -14,7 +14,7 @@ module timer_switch(
 
 ![](asmd.png)
 
-`timer_switch.sv + timer_switch.sv`
+`timer_switch.sv + timer_switch_test.sv`
 ![](sim-timer-switch.png)
 
 ## timer_switch_top.sv

@@ -35,7 +35,6 @@ module timer_switch(
         begin
           next_state = ON;
           next_timer = ON_DURATION;
-          light = '1;
         end
       end
       ON: 
@@ -44,9 +43,10 @@ module timer_switch(
         if (timer==0)
           next_state = OFF;
         else
-          next_timer = timer - 1;
-        if (btn)
-          next_timer = ON_DURATION; // pushing the button while in ON state will reset the timer to ON_DURATION
+          if (btn)
+            next_timer = ON_DURATION;
+          else
+            next_timer = timer - 1;
       end
     endcase
   end
