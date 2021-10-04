@@ -1,4 +1,4 @@
-call C:\Xilinx\Vivado\2020.1\settings64.bat
+call %XILINX_SET%
 call xvlog -sv -nolog timer_switch.sv timer_switch_top.sv single_shot.sv timer_switch_top_test.sv 
 if ERRORLEVEL 1 (
   exit

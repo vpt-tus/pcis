@@ -1,4 +1,4 @@
-call C:\Xilinx\Vivado\2020.1\settings64.bat
+call %XILINX_SET%
 call xvlog -sv -nolog edge_detector.sv edge_detector_test2.sv 
 if ERRORLEVEL 1 (
   exit

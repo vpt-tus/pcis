@@ -1,4 +1,4 @@
-call C:\Xilinx\Vivado\2020.1\settings64.bat
+call %XILINX_SET%
 call xvlog -sv -nolog fsm1.sv fsm1_test.sv 
 if ERRORLEVEL 1 (
   exit
