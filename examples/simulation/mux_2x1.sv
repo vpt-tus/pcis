@@ -1,36 +1,37 @@
-module mux_2x1_proc(
-  output logic [7:0] y,
-  input [7:0] a,b,
+module mux_2x1_df #(parameter N = 8)(
+  output logic [N-1:0] q,
+  input [N-1:0] a,b,
+  input select);
+
+  assign q = ~select ? a : b;
+endmodule
+
+module mux_2x1_proc #(parameter N = 8)(
+  output logic [N-1:0] q,
+  input [N-1:0] a,b,
   input select);
 
   always_comb
-    if (select) y = a;
-    else y = b;
-endmodule
-
-module mux_2x1_cont(
-  output logic [7:0] y,
-  input [7:0] a,b,
-  input select);
-
-  assign y = select ? a : b;
+    if (~select) q = a;
+    else q = b;
 endmodule
 
 module mux_2x1_test;
-  logic [7:0] a,b,y;
+  logic [7:0] a,b,q1,q2;
   logic select;
 
-  mux_2x1_proc uut (.*);
+  mux_2x1_df D1 (.q(q1), .*);
+  mux_2x1_proc D2 (.q(q2), .*);
 
-  initial $monitor("%b %b %b",a,b,y);
+  initial $monitor("%b: %h %h -> %h %h",select,a,b,q1,q2);
 
   initial begin
-    a = 8'b00001111;
-    b = 8'b10101010;
-    select = 1'b0;
-    #10;
-    select = 1'b1;
-    #10;
-    $finish;
+    select = 1'b0; a = 8'h0f; b = 8'hf0;
+    #10 select = 1'b1; a = 8'h0f; b = 8'hf0;
+    #10 select = 1'b0; a = 8'h5a; b = 8'ha5;
+    #10 select = 1'b1; a = 8'h5a; b = 8'ha5;
+    #10 select = 1'b0; a = 8'h00; b = 8'hff;    
+    #10 select = 1'b1; a = 8'h00; b = 8'hff;
+    #10 $finish;
   end
 endmodule

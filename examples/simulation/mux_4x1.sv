@@ -1,14 +1,14 @@
-module mux_4x1(
-  output logic Y,
-  input [7:0] A, B, C, D,
-  input [1:0] select
-  );
+module mux_4x1 #(parameter N=8)(
+  output logic [N-1:0] Q,
+  input [N-1:0] A0, A1, A2, A3,
+  input [1:0] SEL );
 
-always_comb
-  case (select)
-    2'b00: Y = A;
-    2'b01: Y = B;
-    2'b10: Y = C;
-    2'b11: Y = D;
-  endcase
+  always_comb
+    case (SEL)
+      0: Q = A0;
+      1: Q = A1;
+      2: Q = A2;
+      3: Q = A3;
+    endcase
 endmodule
+

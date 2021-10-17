@@ -15,7 +15,7 @@ module adder4_test;
 	adder4 uut (.*);
 
 	initial begin
-		$display("A B C_in C_out Sum");
+		$display("     A B C_in C_out Sum");
 		$monitor("  %b      %b     %b   -> %b %b", A, B, C_in, C_out, Sum);
 		A = 0; B = 0; C_in = 0;
 		#10;

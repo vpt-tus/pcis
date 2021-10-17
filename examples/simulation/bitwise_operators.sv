@@ -1,4 +1,4 @@
-`timescale 1ns / 1ps
+
 module bitwise_operators_test;
 
 logic [3:0] A, B;

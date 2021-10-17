@@ -1,9 +1,7 @@
-`timescale 10ns / 1ns
-
 module full_adder (
   input a, b, cin,
-  output s, cout
-);
+  output s, cout);
+
   assign s = a ^ b ^ cin;
   assign cout = (a & b) | (cin & a) | (cin & b);
 endmodule
@@ -12,8 +10,8 @@ module ripple_carry_adder #(parameter N = 4) (
   input carry_in,
   input [N-1:0] op1, op2,
   output logic [N-1:0] sum,
-  output logic carry_out
-);
+  output logic carry_out);
+
   logic [N:0] carry;
 
   assign carry[0] = carry_in;
@@ -28,9 +26,10 @@ module ripple_carry_adder_5bit (
   input carry_in,
   input [4:0] op1, op2,
   output logic [4:0] sum,
-  output logic carry_out
-);
+  output logic carry_out);
+
   ripple_carry_adder #(.N(5)) uut (.*);
+
 endmodule
 
 module ripple_carry_adder_test_1;
@@ -49,7 +48,7 @@ module ripple_carry_adder_test_1;
         for(int j = 0; j < 2**OP_WIDTH; j++) begin
           op1 = i;
           op2 = j;
-          #10 assert ({carry_out,sum} == i+j+carry_in)
+          #10 assert ({carry_out,sum} == i + j + carry_in)
           else $warning("expected sum=%d, actual sum=%d (%d + %d + %b)",i+j+carry_in, sum, op1, op2, carry_in);
         end;
       end;
