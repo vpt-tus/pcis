@@ -1,12 +1,12 @@
 // Dataflow style
 module decoder_2x4_v1 (
-  output logic [0:3] Q,
+  output logic [3:0] Q,
   input A, B, E);
 
-  assign Q[0] = !(!A && !B && !E);
-  assign Q[1] = !(!A && B && !E);
-  assign Q[2] = !(A && !B && !E);
-  assign Q[3] = !(A && B && !E);
+  assign Q[3] = !(!A && !B && !E);
+  assign Q[2] = !(!A && B && !E);
+  assign Q[1] = !(A && !B && !E);
+  assign Q[0] = !(A && B && !E);
 endmodule
 
 // Behavioral style
@@ -38,7 +38,7 @@ endmodule
 
 module decoder_test_1;
 
-  logic [0:3] Q1, Q2;
+  logic [3:0] Q1, Q2;
   logic A, B, E;
 
   decoder_top uut (.*);
@@ -46,6 +46,7 @@ module decoder_test_1;
   initial begin
     $display("E A B ->  Q1   Q2");
     $monitor("%b %b %b -> %b %b", E, A, B, Q1, Q2);
+    
     E = 1; A = 0; B = 0;
     #100 E = 0;
     #100 A = 0; B = 0;
@@ -58,14 +59,15 @@ module decoder_test_1;
 endmodule
 
 module decoder_test_2;
-  logic [0:3] Q1, Q2;
+  logic [3:0] Q1, Q2;
   logic A, B, E;
 
   decoder_top uut (.*);
 
   initial begin
-    $display("E A B ->  Q1 Q2");
+    $display("E A B ->  Q1   Q2");
     $monitor("%b %b %b -> %b %b", E, A, B, Q1, Q2);
+
     for (integer i=0; i<=7; i++) begin
       {E,A,B} = i;
       #100;
