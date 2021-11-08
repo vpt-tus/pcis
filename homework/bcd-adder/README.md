@@ -1,6 +1,6 @@
 # Суматор на BCD числа
 ## Указания
-Моделите се намират в GitHub проекта https://github.com/vtchoumatchenko/PCIS в директория /homework/bcd-adder. 
+Моделите се намират в GitHub проекта https://github.com/vpt-tus/pcis в директория /homework/bcd-adder. 
 Използвайте Clone or download за да копирате цялата репозитория.
 
 ## Задача 1

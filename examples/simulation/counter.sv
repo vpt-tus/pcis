@@ -1,8 +1,8 @@
 
 module counter #(parameter N = 8) (
-  input clock,
-  input reset,
-  output var logic [N-1:0] cnt
+  input logic clock,
+  input logic reset,
+  output logic [N-1:0] cnt
 );
 
 always_ff @(posedge clock, posedge reset)

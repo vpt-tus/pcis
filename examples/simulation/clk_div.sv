@@ -4,7 +4,7 @@ module clk_div #(parameter SCALE = 2)(
   input reset,
   output logic clock_out);
 
-  localparam N = $clog2(2*SCALE-1);
+  localparam N = $clog2(SCALE)+1;
   logic [N-1:0] count;
 
   always_ff @ (posedge clock_in, posedge reset)

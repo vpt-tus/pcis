@@ -1,7 +1,7 @@
 # Краен автомат за разпознаване на последователност 11011
 
 ## Указания
-Моделите се намират в GitHub проекта https://github.com/vtchoumatchenko/PCIS в директория homework\fsm-sequence-11011.
+Моделите се намират в GitHub проекта https://github.com/vpt-tus/pcis в директория homework\fsm-sequence-11011.
 
 Използвайте Clone or download за да копирате целият проект.
 

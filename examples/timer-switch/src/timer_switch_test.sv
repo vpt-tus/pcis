@@ -14,14 +14,11 @@ module timer_switch_test;
     reset = 1;
     #T reset = 0;
 
-    #T btn = 1;
-    #T btn = 0;
+    #T btn = 1; #T btn = 0;
 
-    #(50*T) btn = 1;
-    #T btn = 0;
+    #(50*T) btn = 1; #T btn = 0;
 
-    #(10*T) btn = 1;
-    #T btn = 0;
+    #(10*T) btn = 1; #T btn = 0;
     
     #(30*T) $finish();
   end
