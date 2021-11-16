@@ -1,4 +1,4 @@
-call C:\Xilinx\Vivado\2020.1\settings64.bat
+call %XILINX_SET%
 call xvlog -sv -nolog bcd_pkg.sv bcd_adder_1d.sv bcd_adder_1d_test.sv 
 if ERRORLEVEL 1 (
   exit
