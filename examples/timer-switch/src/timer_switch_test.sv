@@ -38,13 +38,13 @@ module timer_switch_test;
   // Alternative with min ON duration check
   property light_is_on_for_at_least_20cycles;
     @(posedge clock) $rose(btn) |=> light [*20];
-  endproperty;
+  endproperty
   assert property (light_is_on_for_at_least_20cycles);
    
   // Check ON duration - alternative
   property light_remains_on_exactly_20cycles_after_the_last_btn_rise;
     @(posedge clock) disable iff (reset) $fell(light) |-> $past(btn, 21) and $past(~btn, 22);
-  endproperty;
+  endproperty
   assert property (light_remains_on_exactly_20cycles_after_the_last_btn_rise);
 
 endmodule
