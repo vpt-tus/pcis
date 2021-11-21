@@ -1,8 +1,9 @@
 module timer_light #(parameter T=20) (
-  input logic clock, reset, push_btn,
+  input logic clock,
+  input logic reset, 
+  input logic push_btn,
   output logic light
 );
-
   enum logic {OFF, ON} state, next_state;
   integer timer, next_timer;
 

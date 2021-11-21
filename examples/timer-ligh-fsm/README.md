@@ -22,7 +22,28 @@
 [Tест timer_light_test.sv](timer_light_test.sv)
 
 ## Симулация
-![](fig/timer-light-wave.png)
+![](fig/fig-l4.png)
+
+```SystemVerilog
+// After reset, the FSM is in state ON and the signal light is '1'
+assert property(@(posedge clock) reset |=> uut.state == uut.ON and light);
+```
+![](fig/fig-l1.png)
+
+```SystemVerilog
+// Pressing the button turns on the lights
+assert property(@(posedge clock) ~push_btn ##1 push_btn |=> light);
+```
+![](fig/fig-l2.png)
+
+```SystemVerilog
+ // ON state duration
+property light_is_on_for_ON_PERIOD_clock_periods;
+  @(posedge clock) uut.state == uut.OFF and $rose(push_btn) |=> light [*ON_PERIOD] ##1 ~light;
+endproperty
+assert property (light_is_on_for_ON_PERIOD_clock_periods);
+```
+![](fig/fig-l3.png)
 
 ```
 run -all
