@@ -1,6 +1,6 @@
 import tlight_package::*;
 
-module tlight_test;
+module tlight_v2_test;
   localparam T = 10;
 
   logic clock = 0;

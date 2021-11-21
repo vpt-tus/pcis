@@ -39,67 +39,54 @@ module tlight_v2(
     state_next = state;
 
     case (state)
-      RESET: 
-      begin
+      RESET: begin
         ns = RED;
         we = RED;
         timer_next = YELLOW_DURATION;
         state_next = WE_READY_TO_GO;
       end
-      WE_READY_TO_GO: 
-      begin
+      WE_READY_TO_GO: begin
         ns = RED;
         we = YELLOW;
-        if (timer_next==0) 
-        begin
+        if (timer == 0) begin
           state_next = WE_GO;
           timer_next = RED_GREEN_DURATION;
-        end
-        else
+        end else
           timer_next = timer - 1;
       end
-      WE_GO: 
-      begin
+      WE_GO: begin
         ns = RED;
         we = GREEN;
-        if (timer_next==0) 
+        if (timer == 0) 
           state_next = WE_PREPARE_TO_STOP;
         else
           timer_next = timer - 1;
       end
-      WE_PREPARE_TO_STOP: 
-      begin
+      WE_PREPARE_TO_STOP: begin
         ns = RED;
         we = YELLOW;        
         state_next = NS_READY_TO_GO;
         timer_next = YELLOW_DURATION;
       end
-      NS_READY_TO_GO: 
-      begin
+      NS_READY_TO_GO: begin
         ns = YELLOW;
         we = RED;
-        if (timer_next==0) 
-        begin
+        if (timer == 0) begin
           state_next = NS_GO;
           timer_next = RED_GREEN_DURATION;
-        end
-        else
+        end else
           timer_next = timer - 1;
       end
-      NS_GO: 
-      begin
+      NS_GO: begin
         ns = GREEN;
         we = RED;
-        if (timer_next==0) 
-        begin
+        if (timer == 0) begin
           state_next = NS_PREPARE_TO_STOP;
           timer_next = YELLOW_DURATION;
-        end
-        else
+        end else
           timer_next = timer - 1;
       end
-      NS_PREPARE_TO_STOP: 
-      begin
+      NS_PREPARE_TO_STOP: begin
         ns = YELLOW;
         we = RED;        
         state_next = WE_READY_TO_GO;
