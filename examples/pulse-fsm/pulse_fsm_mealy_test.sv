@@ -1,9 +1,9 @@
-module pulse_fsm_test;
+module pulse_fsm_mealy_test;
 
   logic clock, sig, pulse, reset;
 
   localparam PW=5;
-  pulse_fsm #(.PULSE_WIDTH(PW)) uut  (.*);
+  pulse_fsm_mealy #(.PULSE_WIDTH(PW)) uut  (.*);
 
   localparam T = 10;
   initial begin
@@ -22,10 +22,10 @@ module pulse_fsm_test;
     #200 $finish;
   end
 
-  property pulse_is_high_for_4_clock_periods;
-    @(posedge clock) $rose(sig) |-> pulse [*PW] ##1 ~pulse;
+  property pulse_is_high_for_PW_clock_periods;
+    @(posedge clock) $rose(sig) |=> pulse [*PW] ##1 ~pulse;
   endproperty
-  assert property (pulse_is_high_for_4_clock_periods) else $error("Test 6");
+  assert property (pulse_is_high_for_PW_clock_periods) else $error("Test 6");
 
   initial begin
     $timeformat(-9, 2, "ns", 10);
