@@ -5,4 +5,4 @@ if ERRORLEVEL 1 (
 )
 call xelab -R -s tlight_v1_test -nolog -debug all tlight_v1_test
 del *.jou,*.log
-call xsim tlight_v1_test -gui
+rem call xsim tlight_v1_test -gui

@@ -7,3 +7,5 @@ xsim.dir
 *.ini
 *.xise
 *.str
+*.aux
+*.synctex.gz

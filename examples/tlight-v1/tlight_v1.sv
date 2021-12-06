@@ -1,4 +1,6 @@
 package tlight_package;
+  parameter T_YELLOW = 3;
+  parameter T_RED = 15;
   typedef enum logic [2:0]{
     RED = 3'b100,
     YELLOW = 3'b010,
@@ -13,11 +15,7 @@ module tlight_v1(
 );
 
   enum logic[1:0] {S1, S2, S3, S4} state, state_next;
-
-  logic [3:0] timer, timer_next;
-
-  parameter YELLOW_DURATION = 3;
-  parameter RED_GREEN_DURATION = 15;
+  logic[3:0] timer, timer_next;
 
   always_ff @(posedge clock or posedge reset)
     if (reset)
@@ -27,7 +25,7 @@ module tlight_v1(
 
   always_ff @(posedge clock, posedge reset)
     if (reset) begin
-      timer <= YELLOW_DURATION;
+      timer <= T_YELLOW;
     end else begin
       timer <= timer_next;
     end
@@ -40,7 +38,7 @@ module tlight_v1(
         we = YELLOW;
         if (timer == 0) begin
           state_next = S2;
-          timer_next = RED_GREEN_DURATION;
+          timer_next = T_RED;
         end else begin
           timer_next = timer - 1;
         end
@@ -50,7 +48,7 @@ module tlight_v1(
         we = GREEN;
         if (timer == 0) begin
           state_next = S3;
-          timer_next = YELLOW_DURATION;
+          timer_next = T_YELLOW;
         end else begin
           timer_next = timer - 1;
         end
@@ -60,7 +58,7 @@ module tlight_v1(
         we = YELLOW;
         if (timer == 0) begin
           state_next = S4;
-          timer_next = RED_GREEN_DURATION;
+          timer_next = T_RED;
         end else begin
           timer_next = timer - 1;
         end
@@ -70,7 +68,7 @@ module tlight_v1(
         we = RED;
         if (timer == 0) begin
           state_next = S1;
-          timer_next = YELLOW_DURATION;
+          timer_next = T_YELLOW;
         end else begin
           timer_next = timer - 1;
         end

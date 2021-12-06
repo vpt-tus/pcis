@@ -1,7 +1,7 @@
 import tlight_package::*;
 
 module tlight_v1_test;
-  localparam T = 10;
+  localparam TCLOCK = 10;
 
   logic clock = 0;
   logic reset;
@@ -9,12 +9,12 @@ module tlight_v1_test;
 
   tlight_v1 uut(.*);
 
-  always #(T/2) clock = ~clock;
+  always #(TCLOCK/2) clock = ~clock;
 
   initial begin
     reset = 1;
-    #T reset = 0;
-    #(100*T) $finish;
+    #3 reset = 0;
+    #(50*TCLOCK) $finish;
   end
 
   // Check the initial state
@@ -24,16 +24,16 @@ module tlight_v1_test;
   // Check state duration and next state transition
   //
   ap_check_S2_duration: assert property
-    (@(posedge clock) uut.state == uut.S1 ##1 uut.state == uut.S2 |=> uut.state==uut.S2 [*15] ##1 uut.state==uut.S3);
+    (@(posedge clock) uut.state == uut.S1 ##1 uut.state == uut.S2 |=> uut.state==uut.S2 [*T_RED] ##1 uut.state==uut.S3);
 
   ap_check_S3_duration: assert property
-    (@(posedge clock) uut.state == uut.S2 ##1 uut.state == uut.S3 |=> uut.state==uut.S3 [*3] ##1 uut.state==uut.S4);
+    (@(posedge clock) uut.state == uut.S2 ##1 uut.state == uut.S3 |=> uut.state==uut.S3 [*T_YELLOW] ##1 uut.state==uut.S4);
 
   ap_check_S4_duration: assert property
-    (@(posedge clock) uut.state == uut.S3 ##1 uut.state == uut.S4 |=> uut.state==uut.S4 [*15] ##1 uut.state==uut.S1);
+    (@(posedge clock) uut.state == uut.S3 ##1 uut.state == uut.S4 |=> uut.state==uut.S4 [*T_RED] ##1 uut.state==uut.S1);
 
   ap_check_S1_duration: assert property
-    (@(posedge clock) uut.state == uut.S4 ##1 uut.state == uut.S1 |=> uut.state==uut.S1 [*3] ##1 uut.state==uut.S2);
+    (@(posedge clock) uut.state == uut.S4 ##1 uut.state == uut.S1 |=> uut.state==uut.S1 [*T_YELLOW] ##1 uut.state==uut.S2);
   //
   // Verify state -> lights relations
   //
