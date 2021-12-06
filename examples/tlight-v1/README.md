@@ -5,12 +5,12 @@
 ![](fig/tl-states.png)
 
 ## Диаграма на състоянията
-![](fig/tl-fsm.png)
+![](fig/tlight-fsm-v1-min.png)
 
 ## Модел
-[Mодел tlight_v1.sv](tlight_v1.sv)
+[Mодел: tlight_v1.sv](tlight_v1.sv)
 
-[Тест tlight_v1_test.sv](tlight_v1_test.sv)
+[Тест: tlight_v1_test.sv](tlight_v1_test.sv)
 
 ## Симулация
 ![](fig/tl-v1-sim-1.png)
