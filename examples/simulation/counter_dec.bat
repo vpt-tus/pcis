@@ -5,4 +5,4 @@ if ERRORLEVEL 1 (
 )
 call xelab -R -s counter_dec -nolog -debug all counter_dec_test_2
 del *.jou,*.log
-rem call xsim counter -gui
+rem call xsim counter_dec -gui
