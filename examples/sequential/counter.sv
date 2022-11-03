@@ -33,15 +33,15 @@ module counter_test_1;
     #20 reset_n = 1;
     #200;
     reset_n = 0;
-    #50;    
+    #50;
     $finish;
   end
 
+  initial $display("reset_n   cnt  cnt");
+  always @(negedge clock) $display("  %b      %b   %d", reset_n, cnt, cnt);
+
   initial begin
-    $display("reset_n clock   cnt  cnt ");
-    $monitor("  %b      %b     %b   %d", reset_n, clock, cnt, cnt);
     $dumpfile("dump.vcd");
     $dumpvars;
   end
-
 endmodule
