@@ -41,7 +41,8 @@ module shift_register_test_1;
   end
 
   initial begin
-    $monitor("%t %b %b %b",$time, mode, data_in, data_out);
+    $display("                time mode data_in data_out");
+    $monitor("%t  %b %b  %b",$time, mode, data_in, data_out);
     $dumpfile("dump.vcd");
     $dumpvars;
   end
