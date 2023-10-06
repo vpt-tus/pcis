@@ -5,16 +5,16 @@ module fsm1_reg_test;
 
     fsm1_reg uut (.*);
 
-    parameter period = 100;
+   parameter Tclock = 100;
 
     initial begin
       clock = 0;
-      forever #(period/2) clock = ~clock;
+      forever #(Tclock/2) clock = ~clock;
     end
 
     initial begin
       {go, ws, reset_n} = '0;
-      #period reset_n = 1;
+      #Tclock reset_n = 1;
 
       @(negedge clock)
       assert (uut.state == uut.IDLE) else $error("state - expected: %s , actual: %s",uut.IDLE.name,uut.state.name);
@@ -26,13 +26,8 @@ module fsm1_reg_test;
       assert ({ds,rd} == {1'b0,1'b0}) else $error("{ds,rd} - expected: %b,%b , actual: %b,%b",1'b0,1'b0,ds,rd);
 
       go = 1;
-      @(negedge clock)
-      assert (uut.state == uut.READ) else $error("state - expected: %s , actual: %s",uut.READ.name,uut.state.name);
-      assert ({ds,rd} == {1'b0,1'b1}) else $error("{ds,rd} - expected: %b,%b , actual: %b,%b",1'b0,1'b1,ds,rd);
-
-      @(negedge clock)
-      assert (uut.state == uut.DELAY)  else $error("state - expected: %s , actual: %s",uut.DELAY.name,uut.state.name);
-      assert ({ds,rd} == {1'b0,1'b1}) else $error("{ds,rd} - expected: %b,%b , actual: %b,%b",1'b0,1'b1,ds,rd);
+      @(negedge clock) check(1'b0, 1'b1, uut.READ);
+      @(negedge clock) check(1'b0, 1'b1, uut.DELAY);
 
       go = 0; ws = 1;
       @(negedge clock) check(1'b0, 1'b1, uut.READ);
@@ -42,7 +37,7 @@ module fsm1_reg_test;
       @(negedge clock) check(1'b1,1'b0,uut.DONE);
       @(negedge clock) check(1'b0,1'b0,uut.IDLE);
 
-      #(2*period) $finish;
+      #(2*Tclock) $finish;
     end
 
     task check (input logic a, b, logic [1:0] state);

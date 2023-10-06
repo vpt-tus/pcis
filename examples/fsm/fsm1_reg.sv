@@ -3,8 +3,7 @@ module fsm1_reg(
     input go, ws, clock, reset_n
 );
 
-typedef enum logic [1:0] {IDLE, READ, DELAY, DONE} state_t;
-state_t state, state_next;
+enum logic [1:0] {IDLE, READ, DELAY, DONE} state, state_next;
 
 // state register
 always_ff @(posedge clock, negedge reset_n)

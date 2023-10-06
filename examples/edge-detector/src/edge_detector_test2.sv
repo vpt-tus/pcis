@@ -37,7 +37,9 @@ initial begin
     @(posedge clk) assert (tick == 1'b0) else $error("tick: expected=%b, actual=%b",1'b0,tick);
 end
 
-initial
+initial begin
     $monitor("%t sig=%b, tick=%b",$time,sig,tick);
+    $dumpfile("dump.vcd"); $dumpvars;
+end
 
 endmodule

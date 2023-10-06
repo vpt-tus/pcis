@@ -2,9 +2,8 @@ module fsm1(
   output logic rd, ds,
   input go, ws, clock, reset_n
 );
-    // state type
-    typedef enum logic [1:0] {IDLE, READ, DELAY, DONE} state_t;
-    state_t state, state_next;
+    // states
+    enum logic [1:0] {IDLE, READ, DELAY, DONE} state, state_next;
 
     // state register
     always_ff @(posedge clock, negedge reset_n)
