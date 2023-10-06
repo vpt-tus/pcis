@@ -2,13 +2,10 @@
 
 Technical University - Sofia, Department of Electronics
 
-## Регистрация за ПЦИС 2022 
+## ПЦИС 2023 - График на лекциите
 
-Отнася се за студентите от ТУ-София/ФЕТТ/Електронна Техника/Курс 4/Група 51
+https://calendar.google.com/calendar/u/0?cid=OGRmMjk1NDZjYjc2MzI5NGQ0NzU3MmZmMTA4ZWViNTg4YjY3NWMzZmVjNDNlY2Q4YTFiOTMyNDAyNGNmYTI5MEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t
 
-https://forms.gle/M6f8uqCnymsT6Vmh6
+## Презентации за лекции и указания за проекти
 
-
-## ПЦИС 2022 - График на лекциите и домашните работи
-
-https://calendar.google.com/calendar/embed?src=8df29546cb763294d47572ff108eeb588b675c3fec43ecd8a1b9324024cfa290%40group.calendar.google.com&ctz=Europe%2FSofia
+https://drive.google.com/drive/folders/0BxEAFQHdPMEFaGFqWF9faGlVUFU?resourcekey=0-uUo_4VXyiVbUb9UTetTi4g&usp=sharing
