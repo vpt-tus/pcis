@@ -31,8 +31,7 @@ module counter_test_1;
   initial begin
     reset_n = 0;
     #20 reset_n = 1;
-    #200;
-    reset_n = 0;
+    #200; reset_n = 0;
     #50;
     $finish;
   end
