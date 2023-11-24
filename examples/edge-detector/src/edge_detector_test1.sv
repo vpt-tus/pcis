@@ -30,6 +30,7 @@ module edge_detector_test1;
   initial begin
     $timeformat(-9, 2, " ns", 10);
     $monitor("%t sig=%b, tick=%b",$time,sig,tick);
+    $dumpfile("dump.vcd"); $dumpvars;
   end
 
 endmodule

@@ -6,14 +6,16 @@ module example_fork;
   initial $monitor($time, " foo=", foo, " bar=", bar, " baz=", baz, " quux=", quux);
   initial #300 $finish;
   
-  initial fork
-    foo = 0;
-    #100 foo = 1;
-    #120 foo = 0;
-    #130 foo = 1;
-    #170 foo = 0;
-    #220 foo = 1;
-  join;
+  initial begin
+    fork
+      foo = 0;
+      #100 foo = 1;
+      #120 foo = 0;
+      #130 foo = 1;
+      #170 foo = 0;
+      #220 foo = 1;
+  	join;
+  end
   initial begin
     bar <= 0;
     bar <= #100 1;

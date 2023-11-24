@@ -1,11 +1,11 @@
 
 module latch (
-  input logic d,
-  input logic enable,  
+  input d,
+  input enable,  
   output logic q
 );
 
-always_ff @(*)
+always_latch
   if (enable)
     q <= d;
   else
